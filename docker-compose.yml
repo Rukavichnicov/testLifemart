@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   php:
-    image: php:8.2-fpm-alpine
+    build: docker-build/php
     user: ${UID:-0}
     volumes:
       - ".:/var/www/html"
@@ -10,6 +10,8 @@ services:
       - '80:80'
     depends_on:
       - db
+    networks:
+      - default
   db:
     image: mysql
     environment:
